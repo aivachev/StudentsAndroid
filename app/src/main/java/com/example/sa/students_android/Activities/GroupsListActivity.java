@@ -1,9 +1,12 @@
 package com.example.sa.students_android.Activities;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +15,15 @@ import android.view.ViewGroup;
 import com.example.sa.students_android.Adapters.GroupHolder;
 import com.example.sa.students_android.Models.Group;
 import com.example.sa.students_android.R;
+import com.example.sa.students_android.SQLite.DatabaseHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sa on 22.06.17.
@@ -23,30 +32,36 @@ import java.util.List;
 public class GroupsListActivity extends Activity {
 
     RecyclerView recyclerView;
+    DatabaseHandler databaseHandler;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
 
-        ArrayList<Group> groups = new ArrayList<>();
-        groups.add(new Group(1000));
+        databaseHandler = new DatabaseHandler(this);
+
         recyclerView = findViewById(R.id.groupsList);
         recyclerView.setAdapter(new GroupsAdapter());
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        DividerItemDecoration dividerItemDecorationHor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
+        DividerItemDecoration dividerItemDecorationVert = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+
+        recyclerView.addItemDecoration(dividerItemDecorationHor);
+        recyclerView.addItemDecoration(dividerItemDecorationVert);
     }
 
     class GroupsAdapter extends RecyclerView.Adapter<GroupHolder> {
 
 
-        List<Group> groupList = new ArrayList<>();
+        List<Long> groupList = new ArrayList<>();
 
         public GroupsAdapter() {
-            groupList.add(new Group(1000));
-            groupList.add(new Group(1004));
-            groupList.add(new Group(1005));
-            groupList.add(new Group(1006));
+            for(Map.Entry o : databaseHandler.getGroups().entrySet()) {
+                groupList.add((Long) o.getKey());
+            }
         }
 
         @Override
@@ -59,12 +74,28 @@ public class GroupsListActivity extends Activity {
 
         @Override
         public void onBindViewHolder(GroupHolder holder, int position) {
-            holder.bindData(groupList.get(position));
+
+            Arrays.sort(databaseHandler.getGroups().entrySet().toArray(), new Comparator<Object>() {
+                @Override
+                public int compare(Object o, Object t1) {
+                    switch ( ( (Long) (((Map.Entry)o).getKey())).compareTo(((Long)(((Map.Entry)t1).getKey())))) {
+                        case -1:
+                            return -1;
+                        case 0:
+                            return 0;
+                        case 1:
+                            return 1;
+                    }
+                    return 0;
+                }
+            });
+            //Map.Entry[] entries = (Map.Entry[]) databaseHandler.getGroups().entrySet().toArray();
+            holder.bindData(databaseHandler.getGroups().entrySet().toArray()[position]);
         }
 
         @Override
         public int getItemCount() {
-            return groupList.size();
+            return databaseHandler.getGroups().size();
         }
 
         public void delete(int position) {

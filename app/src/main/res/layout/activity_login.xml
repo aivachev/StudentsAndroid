@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/guideline3">
 
         <EditText
-
+            android:text="admin"
             android:layout_marginBottom="12dp"
             android:background="@null"
             android:id="@+id/login_field"
@@ -33,6 +33,7 @@
             android:textAlignment="center" />
 
         <EditText
+            android:text="admin"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="24dp"
             android:background="@null"
@@ -114,10 +115,10 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <Button
-        android:id="@+id/dummyData"
+        android:id="@+id/debug_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Поехали!"
+        android:text="debug"
         app:layout_constraintRight_toLeftOf="@+id/guideline4"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"

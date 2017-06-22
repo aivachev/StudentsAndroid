@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:divider="@android:drawable/divider_horizontal_bright"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp">
 
-    <TextView
-        android:text="Sample"
-        android:textSize="20sp"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/groupListItemName"/>
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/groupListItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sample"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/groupListItemCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sample"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <ImageView
+        android:id="@+id/groupListItemIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/groupListItemIcon"/>
+        app:srcCompat="@mipmap/ic_launcher_round" />
 </LinearLayout>

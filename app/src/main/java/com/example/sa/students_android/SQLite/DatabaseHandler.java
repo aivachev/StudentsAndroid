@@ -5,11 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.sa.students_android.Models.Role;
 import com.example.sa.students_android.Models.User;
 
-import java.io.Serializable;
+import java.util.HashMap;
 
 import static com.example.sa.students_android.SQLite.DBContracts.Users.*;
 
@@ -44,9 +45,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LASTNAME, "admin");
         values.put(KEY_MIDDLENAME, "admin");
         values.put(KEY_DATEOFBIRTH, "1970-01-01");
-        values.put(KEY_GROUPID, 1337);
+        values.put(KEY_GROUP_ID, 1337);
         values.put(KEY_ROLE, Role.ADMIN.toString());
-        db.insert(DBContracts.Users.TABLE_NAME, null, values);
+        db.insert(DBContracts.Users.TABLE_USERS, null, values);
     }
 
     // Upgrading database
@@ -80,11 +81,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_MIDDLENAME, user.getMiddleName());
         values.put(KEY_LASTNAME, user.getLastName());
         values.put(KEY_DATEOFBIRTH, user.getDateOfBirth().toString());
-        values.put(KEY_GROUPID, user.getUserGroup().getGroupID());
+        values.put(KEY_GROUP_ID, user.getUserGroup().getGroupID());
         values.put(KEY_ROLE, user.getRole().toString());
 
 
-        db.insert(TABLE_NAME, null, values);
+        db.insert(TABLE_USERS, null, values);
         db.close();
         return user;
     }
@@ -129,7 +130,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String[] selectionArgs = { login };
 
         Cursor cursor = db.query(
-                TABLE_NAME,                     // The table to query
+                TABLE_USERS,                     // The table to query
                 projection,                               // The columns to return
                 selection,                                // The columns for the WHERE clause
                 selectionArgs,                            // The values for the WHERE clause
@@ -153,5 +154,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         cursor.close();
         return false;
+    }
+
+    public HashMap<Long, Integer> getGroups() {
+        HashMap<Long, Integer> result = new HashMap<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query =
+                "SELECT " + KEY_GROUP_ID + ", COUNT(" + KEY_GROUP_ID + ") FROM " + TABLE_USERS + " GROUP BY " + KEY_GROUP_ID;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor != null) {
+            String str = "";
+            while (cursor.moveToNext()) {
+                result.put(
+                        cursor.getLong(cursor.getColumnIndex(KEY_GROUP_ID)),
+                        cursor.getInt(cursor.getColumnIndex("COUNT(" + KEY_GROUP_ID + ")")));
+
+                //result.put(cursor.getLong(cursor.getColumnIndex(KEY_GROUP_ID), cursor.getInt(cursor.)))
+                for(String cn : cursor.getColumnNames())
+                    str = str.concat(cn + " = " + cursor.getString(cursor.getColumnIndex(cn)) + " ");
+                    Log.d("SQL_QUERY_RESULT ", str);
+                    str = "";
+            }
+        }
+        return result;
     }
 }
