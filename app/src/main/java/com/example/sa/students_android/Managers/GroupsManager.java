@@ -18,7 +18,6 @@ import java.util.Map;
 public class GroupsManager implements ManagerInterface<Group> {
 
     public static HashMap<Long, Group> groups = new HashMap<>();
-    LongSparseArray
 
     public GroupsManager() {
 
