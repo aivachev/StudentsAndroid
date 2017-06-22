@@ -1,17 +1,19 @@
-package com.example.sa.students_android;
+package com.example.sa.students_android.Activities;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sa.students_android.R;
 import com.example.sa.students_android.SQLDB.DatabaseHandler;
 
-import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText loginText;
     EditText passwordText;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 Integer password = passwordText.getText().toString().hashCode();
 
                 if (tryLogin(login, password))
-                    startActivity(new Intent(MainActivity.this, AfterAuthActivity.class));
+                    startActivity(new Intent(LoginActivity.this, AfterAuthActivity.class));
             }
         });
 
@@ -48,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
         registrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SignUpActivity.class).putExtra("dataBase", databaseHandler));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class).putExtra("dataBase", databaseHandler));
             }
         });
 
         databaseHandler = new DatabaseHandler(this);
         databaseHandler.createTable("users");
+
+        databaseHandler.addItem("users", "admin", "admin".hashCode());
     }
 
     private boolean tryLogin(String login, Integer password) {

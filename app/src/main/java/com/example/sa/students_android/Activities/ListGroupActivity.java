@@ -1,9 +1,8 @@
-package com.example.sa.students_android;
+package com.example.sa.students_android.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.solver.ArrayLinkedVariables;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.sa.students_android.Adapters.GroupHolder;
 import com.example.sa.students_android.Models.Group;
+import com.example.sa.students_android.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class ListGroupActivity extends Activity {
 
         ArrayList<Group> groups = new ArrayList<>();
         groups.add(new Group(1000));
-        recyclerView = findViewById(R.id.studentsList);
+        recyclerView = findViewById(R.id.groupsList);
         recyclerView.setAdapter(new GroupsAdapter());
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));

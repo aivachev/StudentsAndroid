@@ -3,9 +3,9 @@
     <string name="regNewUser">Регистрация</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
-    <string name="regPasswordConfirm">Подтвердите пароль</string>
+    <string name="regPasswordConfirm"><font size="14">Подтвердите пароль</font></string>
     <string name="regButtonConfirm">Регистрация</string>
-    <string name="register">Регистация</string>
+    <string name="register">Регистрация</string>
     <string name="appTitle">Менеджер студентов</string>
     <string name="loginTaken">Логин уже используется</string>
     <string name="lOpInvalid">Некорректный логин или пароль</string>

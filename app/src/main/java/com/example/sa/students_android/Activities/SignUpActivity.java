@@ -1,4 +1,4 @@
-package com.example.sa.students_android;
+package com.example.sa.students_android.Activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sa.students_android.R;
 import com.example.sa.students_android.SQLDB.DatabaseHandler;
 
 /**
@@ -22,7 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_sign_up);
 
         databaseHandler = new DatabaseHandler(this);
 

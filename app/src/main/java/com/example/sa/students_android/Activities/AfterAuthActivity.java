@@ -1,9 +1,8 @@
-package com.example.sa.students_android;
+package com.example.sa.students_android.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +14,7 @@ import com.example.sa.students_android.Adapters.JournalListAdapter;
 import com.example.sa.students_android.Managers.LessonsManager;
 import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.Journal;
+import com.example.sa.students_android.R;
 
 import java.util.ArrayList;
 import java.util.List;

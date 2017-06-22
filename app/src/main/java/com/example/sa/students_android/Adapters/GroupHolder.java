@@ -19,8 +19,8 @@ public  class GroupHolder extends RecyclerView.ViewHolder {
 
     public GroupHolder(View itemView) {
         super(itemView);
-        groupName = (TextView) itemView.findViewById(R.id.GroupListItemName);
-        groupIcon = (ImageView) itemView.findViewById(R.id.GroupListItemIcon);
+        groupName = (TextView) itemView.findViewById(R.id.groupListItemName);
+        groupIcon = (ImageView) itemView.findViewById(R.id.groupListItemIcon);
     }
 
     public void bindData(Group group) {
