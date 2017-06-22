@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        startActivity(new Intent(this, AfterAuthActivity.class));
+/*
         loginText = (EditText) findViewById(R.id.login_field);
         passwordText = (EditText) findViewById(R.id.password_field);
 
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         databaseHandler = new DatabaseHandler(this);
         databaseHandler.createTable("users");
+*/
     }
 
     private boolean tryLogin(String login, Integer password) {
