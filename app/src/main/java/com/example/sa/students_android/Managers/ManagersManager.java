@@ -15,7 +15,7 @@ public class ManagersManager implements ManagerInterface<ManagerInterface> {
 
     public ManagersManager() {
         this.groupsManager = new GroupsManager();
-        this.usersManager = new UsersManager();
+        //this.usersManager = new UsersManager();
         this.lessonsManager = new LessonsManager();
     }
 

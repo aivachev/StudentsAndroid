@@ -1,16 +1,19 @@
 package com.example.sa.students_android.Activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sa.students_android.Managers.UsersManager;
+import com.example.sa.students_android.Models.Role;
+import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
-import com.example.sa.students_android.SQLDB.DatabaseHandler;
+import com.example.sa.students_android.SQLite.DatabaseHandler;
+
+import java.util.Date;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,20 +53,35 @@ public class LoginActivity extends AppCompatActivity {
         registrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class).putExtra("dataBase", databaseHandler));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
 
         databaseHandler = new DatabaseHandler(this);
-        databaseHandler.createTable("users");
 
-        databaseHandler.addItem("users", "admin", "admin".hashCode());
+        databaseHandler.addUser(
+                new User("admin", "admin".hashCode(), "Admin", "aDmin", "adMin", new Date(1970, 01, 01), 1337L, Role.ADMIN));
+
+        // Admin functions start here
+
+        // Create a number of dummy students to populate main table
+        Button dummyData = (Button) findViewById(R.id.dummyData);
+        dummyData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UsersManager usersManager = new UsersManager(LoginActivity.this);
+                for(int i = 0; i < 100; i++)
+                    usersManager.addDummyStudent(1990);
+
+            }
+        });
+
     }
 
     private boolean tryLogin(String login, Integer password) {
         if (login.equals("") || password == 0)
             return false;
         return databaseHandler.containsLogin("users", login)
-                && databaseHandler.checkPassword("users", login, password.hashCode());
+                && databaseHandler.checkPassword(login, password.hashCode());
     }
 }

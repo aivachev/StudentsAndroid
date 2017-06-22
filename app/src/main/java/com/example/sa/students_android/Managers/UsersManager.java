@@ -1,9 +1,15 @@
 package com.example.sa.students_android.Managers;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+
 import com.example.sa.students_android.Models.DummyData;
 import com.example.sa.students_android.Models.Role;
 import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.MyUtilMethods.SerializationStuff;
+import com.example.sa.students_android.MyUtilMethods.StringStuff;
+import com.example.sa.students_android.SQLite.DatabaseHandler;
 
 import org.w3c.dom.Document;
 
@@ -11,37 +17,40 @@ import java.util.*;
 
 public class UsersManager implements ManagerInterface<User> {
 
-    private HashMap<Long, User> users = new HashMap<>();
+    private DatabaseHandler databaseHandler;
+
+//    private HashMap<Long, User> users = new HashMap<>();
     private Random random = new Random();
 
-    public UsersManager() {
+    public UsersManager(Context context) {
+        this.databaseHandler = new DatabaseHandler(context);
     }
 
     @Override
     public User add(User user) {
-        return users.put(user.getId(), user);
+        return databaseHandler.addUser(user);
     }
 
     @Override
     public void remove(User user) {
-        user.getUserGroup().remove(user.getId());
-        this.users.remove(user.getId());
+//        user.getUserGroup().remove(user.getId());
+//        this.users.remove(user.getId());
     }
 
     @Override
     public void removeAll() {
-        users.clear();
+//        users.clear();
     }
 
     @Override
     public User get(Long userID) {
-        return users.get(userID);
+        return null;
     }
 
     @Override
     public List<User> getAll() {
         List<User> allElements = new ArrayList<>();
-        allElements.addAll(users.values());
+//        allElements.addAll(users.values());
         return allElements;
     }
 
@@ -57,7 +66,7 @@ public class UsersManager implements ManagerInterface<User> {
 
     @Override
     public void serializeAllToFile(String outputFileName) {
-        SerializationStuff.serializeAllToFile(users, outputFileName);
+//        SerializationStuff.serializeAllToFile(users, outputFileName);
     }
 
     @Override
@@ -75,10 +84,10 @@ public class UsersManager implements ManagerInterface<User> {
 
         Document doc = document;
 
-        for(Object MapEntry : users.entrySet()) {
-            User user = (User) ((Map.Entry) MapEntry).getValue();
-            doc = serializeToXML(user, doc);
-        }
+//        for(Object MapEntry : users.entrySet()) {
+//            User user = (User) ((Map.Entry) MapEntry).getValue();
+//            doc = serializeToXML(user, doc);
+//        }
 
         return doc;
     }
@@ -92,30 +101,37 @@ public class UsersManager implements ManagerInterface<User> {
 
         User user = null;
 
+        String login =
+                  StringStuff.transliterate(lastName)
+                + StringStuff.transliterate(firstName.substring(0, 1))
+                + StringStuff.transliterate(middleName.substring(0, 1));
+
+        String password = "123456";
+
         if (role == Role.TEACHER || role == Role.ADMIN)
-            user = new User(firstName, middleName, lastName, dateOfBirth, null, role);
+            user = new User(login, password.hashCode(), firstName, middleName, lastName, dateOfBirth, null, role);
         if (role == Role.STUDENT)
-            user = new User(firstName, middleName, lastName, dateOfBirth, groupID, role);
+            user = new User(login, password.hashCode(), firstName, middleName, lastName, dateOfBirth, groupID, role);
 
         if (user != null)
-            users.put(user.getId(), user);
+            databaseHandler.addUser(user);
         return user;
     }
 
     public void removeAllUsersByRole(Role role) {
-        for(Object o : users.entrySet())
-            if(((User) ((Map.Entry) o).getValue()).getRole() == role)
-                users.remove(((Map.Entry) o).getKey());
+//        for(Object o : users.entrySet())
+//            if(((User) ((Map.Entry) o).getValue()).getRole() == role)
+//                users.remove(((Map.Entry) o).getKey());
     }
 
     private List<User> getUsersByRole(Role role) {
         List<User> result = new ArrayList<>();
 
-        for (Object o : users.entrySet()) {
-            Map.Entry pair = (Map.Entry) o;
-            if (((User) pair.getValue()).getRole() == role)
-                result.add((User) pair.getValue());
-        }
+//        for (Object o : users.entrySet()) {
+//            Map.Entry pair = (Map.Entry) o;
+//            if (((User) pair.getValue()).getRole() == role)
+//                result.add((User) pair.getValue());
+//        }
 
         return result;
     }
@@ -129,7 +145,7 @@ public class UsersManager implements ManagerInterface<User> {
         int indexLName = random.nextInt(DummyData.LASTNAMES.length);
 
         Random random = new Random();
-        long groupID = 1000L + (long) random.nextInt(3);
+        long groupID = 1000L + (long) random.nextInt(10);
         User user;
 
         if (gender == 0)
@@ -154,9 +170,9 @@ public class UsersManager implements ManagerInterface<User> {
 
     public User getRandomUserByRole(Role role) {
         List result = new ArrayList();
-        if(!users.isEmpty())
-            result = getUsersByRole(role);
-        Random random = new Random();
+//        if(!users.isEmpty())
+//            result = getUsersByRole(role);
+//        Random random = new Random();
 
         return (User) result.get(random.nextInt(result.size()));
     }

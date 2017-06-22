@@ -28,9 +28,9 @@ public class Journal {
     }
 
     public void start() {
-        UsersManager usersManager = new UsersManager();
-        User user = usersManager.addDummyStudent(1993);
-        user.getFirstName();
+        //UsersManager usersManager = new UsersManager();
+        //User user = usersManager.addDummyStudent(1993);
+        //user.getFirstName();
     }
 
 

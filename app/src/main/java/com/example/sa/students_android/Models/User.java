@@ -9,6 +9,8 @@ import java.util.Random;
 
 public class User implements Externalizable {
 
+    private String login;
+    private Integer password;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -23,23 +25,26 @@ public class User implements Externalizable {
         this.id = System.currentTimeMillis() + random.nextInt(100000000);
     }
 
-    public User(String fName, String mName, String lName, Date DoB, Long grID, Role role) {
+    public User(String login, Integer password, String firstName, String middleName, String lastName, Date dateOfBirth, Long groupId, Role role) {
 
         Random random = new Random();
 
-        this.firstName = fName;
-        this.middleName = mName;
-        this.lastName = lName;
-        this.dateOfBirth = DoB;
+        this.login = login;
+        this.password = password;
+
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
         this.id = System.currentTimeMillis() + random.nextInt(100_000_000);
         this.contacts = new Contact();
         this.role = role;
 
-        if(!GroupsManager.groups.containsKey(grID))
-            GroupsManager.createGroup(grID);
-        this.group = GroupsManager.getGroup(grID);
+        if(!GroupsManager.groups.containsKey(groupId))
+            GroupsManager.createGroup(groupId);
+        this.group = GroupsManager.getGroup(groupId);
 
-        GroupsManager.addUserToGroup(this, grID);
+        GroupsManager.addUserToGroup(this, groupId);
     }
 
     @Override
@@ -89,6 +94,13 @@ public class User implements Externalizable {
         return stringBuilder.toString();
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public Integer getPassword() {
+        return password;
+    }
 
     public String getFirstName() {
         return firstName;

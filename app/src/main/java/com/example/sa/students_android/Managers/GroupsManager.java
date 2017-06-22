@@ -17,10 +17,16 @@ import java.util.Map;
  */
 public class GroupsManager implements ManagerInterface<Group> {
 
+    public final GroupsManager soloGroupsManager;
+
     public static HashMap<Long, Group> groups = new HashMap<>();
 
     public GroupsManager() {
+        soloGroupsManager = this;
+    }
 
+    public GroupsManager getGroupsManager() {
+        return this;
     }
 
     public static void createGroup(Long number) {

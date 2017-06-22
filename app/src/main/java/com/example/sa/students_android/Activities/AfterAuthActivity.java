@@ -32,7 +32,7 @@ public class AfterAuthActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inside);
 
-        UsersManager usersManager = new UsersManager();
+        UsersManager usersManager = new UsersManager(this);
         LessonsManager lessonsManager = new LessonsManager();
 
         listContacts = findViewById(R.id.listContacts);

@@ -8,8 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
-import com.example.sa.students_android.SQLDB.DatabaseHandler;
+import com.example.sa.students_android.SQLite.DatabaseHandler;
 
 /**
  * Created by sa on 20.06.17.
@@ -57,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            databaseHandler.addItem("users", login, password.hashCode());
+                            databaseHandler.addUser(new User(login, password.hashCode(), null, null, null, null, null, null));
                             onBackPressed();
                             Toast.makeText(SignUpActivity.this,
                                     getResources().getString(R.string.regSuccess),

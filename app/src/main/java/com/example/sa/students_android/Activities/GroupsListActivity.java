@@ -20,7 +20,7 @@ import java.util.List;
  * Created by sa on 22.06.17.
  */
 
-public class ListGroupActivity extends Activity {
+public class GroupsListActivity extends Activity {
 
     RecyclerView recyclerView;
     @Override
