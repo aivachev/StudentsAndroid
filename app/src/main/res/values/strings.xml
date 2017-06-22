@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Riddles and Puzzles!</string>
+    <string name="regNewUser">Sign up</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="regPasswordConfirm">Confirm password</string>
+    <string name="regButtonConfirm">Sign up!</string>
+    <string name="enter">Enter</string>
+    <string name="register">Sign up</string>
+    <string name="appTitle">Riddles and Puzzles!</string>
+    <string name="loginTaken">Login already taken</string>
+    <string name="lOpInvalid">Login or password is invalid</string>
+    <string name="regSuccess">User created!</string>
+    <string name="passwordReq">At least 6 characters</string>
+</resources>
