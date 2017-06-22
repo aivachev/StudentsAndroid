@@ -1,5 +1,7 @@
 package com.example.sa.students_android.Managers;
 
+import android.util.LongSparseArray;
+
 import org.w3c.dom.Document;
 import com.example.sa.students_android.Models.Group;
 import com.example.sa.students_android.Models.User;
@@ -16,6 +18,7 @@ import java.util.Map;
 public class GroupsManager implements ManagerInterface<Group> {
 
     public static HashMap<Long, Group> groups = new HashMap<>();
+    LongSparseArray
 
     public GroupsManager() {
 

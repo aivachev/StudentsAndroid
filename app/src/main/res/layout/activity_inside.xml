@@ -132,13 +132,11 @@
                     android:textColor="#FFFFFF"
                     android:textSize="25sp"
                     android:textStyle="bold" />
+
                 <ListView
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/journalList">
-
-                </ListView>
+                    android:id="@+id/listContacts"/>
 
 
             </LinearLayout>
@@ -159,11 +157,10 @@
                     android:textStyle="bold" />
 
                 <ListView
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/listContacts">
-
-                </ListView>
+                    android:id="@+id/journalList"/>
 
             </LinearLayout>
         </LinearLayout>
