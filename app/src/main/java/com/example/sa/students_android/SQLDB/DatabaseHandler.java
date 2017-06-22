@@ -30,13 +30,6 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Serializable {
     private static final String KEY_LOGIN = "login";
     private static final String KEY_PASSWORD = "password";
 
-    private static final String KEY_DESCRIPTION = "description";
-    private static final String KEY_DATE = "date";
-    private static final String KEY_CONTENT = "content";
-    private static final String KEY_IMAGE = "image";
-    private static final String KEY_SEEN = "seen";
-    private static final String KEY_FAVORITE = "favorite";
-
     private static final String TAG = "DatabaseHandler";
 
     public DatabaseHandler(Context context) {
@@ -94,11 +87,70 @@ public class DatabaseHandler extends SQLiteOpenHelper implements Serializable {
         return cursor.getCount() > 0;
     }
 
-    public Integer getValue(String login) {
+    public boolean containsLogin(String table, String login) {
+
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT count(*) FROM users WHERE login=?", new String[] {login + ""});
-        cursor.moveToNext();
-        return cursor.getCount() > 0 ? cursor.getInt(cursor.getColumnIndex(KEY_PASSWORD)) : 0;
+        String selection = KEY_LOGIN + " = ?";
+        String[] selectionArgs = { login };
+
+        Cursor cursor = db.query(
+                table,                     // The table to query
+                null,                      // The columns to return
+                selection,                 // The columns for the WHERE clause
+                selectionArgs,             // The values for the WHERE clause
+                null,                      // don't group the rows
+                null,                      // don't filter by row groups
+                null                       // The sort order
+        );
+
+        Integer count = cursor.getCount();
+
+        cursor.close();
+        db.close();
+
+        return count > 0;
+    }
+
+    public boolean checkPassword(String table, String login, Integer inputPassword) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// Define a projection that specifies which columns from the database
+// you will actually use after this query.
+        String[] projection = {
+                KEY_PASSWORD
+        };
+
+// Filter results WHERE "title" = 'My Title'
+        String selection = KEY_LOGIN + " = ?";
+        String[] selectionArgs = { login };
+
+        Cursor cursor = db.query(
+                table,                     // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                 // The sort order
+        );
+
+        if(cursor.getCount() == 0) {
+            cursor.close();
+            return false;
+        }
+        if(cursor.getCount() >= 1) {
+            // Should never be more than 1, but still...
+            while (cursor.moveToNext()) {
+                if (cursor.getInt(cursor.getColumnIndex("password")) == inputPassword) {
+                    cursor.close();
+                    return true;
+                }
+            }
+        }
+
+        cursor.close();
+        return false;
     }
 }

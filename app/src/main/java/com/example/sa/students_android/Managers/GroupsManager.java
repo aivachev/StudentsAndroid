@@ -32,10 +32,6 @@ public class GroupsManager implements ManagerInterface<Group> {
         groups.get(groupID).setSize(groups.get(groupID).getSize() + 1);
     }
 
-//    public static ArrayList getAllGroups() {
-//
-//    }
-
     public static Group getGroup(long groupID) {
         return groups.get(groupID);
     }
