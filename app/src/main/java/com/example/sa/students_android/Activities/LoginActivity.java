@@ -59,9 +59,6 @@ public class LoginActivity extends AppCompatActivity {
 
         databaseHandler = new DatabaseHandler(this);
 
-//        databaseHandler.addUser(
-//                new User("admin", "admin".hashCode(), "Admin", "aDmin", "adMin", new Date(1970, 01, 01), 1337L, Role.ADMIN));
-
         Button debugMode = (Button) findViewById(R.id.debug_mode);
         debugMode.setOnClickListener(new View.OnClickListener() {
             @Override

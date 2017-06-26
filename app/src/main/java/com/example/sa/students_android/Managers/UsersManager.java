@@ -154,7 +154,7 @@ public class UsersManager implements ManagerInterface<User> {
                     DummyData.LASTNAMES[indexLName],
                     new Date(year - 1 + random.nextInt(3),
                             random.nextInt(12) + 1,
-                            random.nextInt(29) + 1),
+                            random.nextInt(28) + 1),
                     groupID, Role.STUDENT);
         else
             user = createUser(DummyData.FIRSTNAMES_FEMALES[indexFNameFemales],
@@ -162,7 +162,7 @@ public class UsersManager implements ManagerInterface<User> {
                     DummyData.LASTNAMES[indexLName] + "а",
                     new Date(year - 1 + random.nextInt(3),
                             random.nextInt(12) + 1,
-                            random.nextInt(29) + 1),
+                            random.nextInt(28) + 1),
                     groupID, Role.STUDENT);
         //add(user);
         return user;

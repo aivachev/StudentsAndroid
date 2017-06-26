@@ -6,13 +6,13 @@ import android.provider.BaseColumns;
  * Created by sa on 22.06.17.
  */
 
-public final class DBContracts {
+final class DBContracts {
 
     // private empty constructor
     private DBContracts() {}
 
     // "users" table, containing all users info
-    public static class Users implements BaseColumns {
+    static class Users implements BaseColumns {
 
         static final String TABLE_USERS = "users";
         static final String KEY_PERSONAL_ID = "personal_id";
@@ -23,6 +23,7 @@ public final class DBContracts {
         static final String KEY_LASTNAME = "last_name";
         static final String KEY_DATEOFBIRTH = "date_of_birth";
         static final String KEY_GROUP_ID = "group_id";
+        static final String KEY_CONTACTS = "contacts";
         static final String KEY_ROLE = "role";
 
         static final String SQL_CREATE_ENTRIES =
@@ -34,8 +35,9 @@ public final class DBContracts {
                         + KEY_FIRSTNAME + " TEXT,"
                         + KEY_MIDDLENAME + " TEXT,"
                         + KEY_LASTNAME + " TEXT,"
-                        + KEY_DATEOFBIRTH + " TEXT,"
+                        + KEY_DATEOFBIRTH + " BLOB,"
                         + KEY_GROUP_ID + " INTEGER,"
+                        + KEY_CONTACTS + " BLOB,"
                         + KEY_ROLE + " TEXT"
                         + ")";
 

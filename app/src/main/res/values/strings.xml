@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">Менеджер студетов</string>
-    <string name="regNewUser">Регистрация</string>
+    <string name="sign_up">Регистрация</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
-    <string name="regPasswordConfirm"><font size="14">Подтвердите пароль</font></string>
-    <string name="regButtonConfirm">Регистрация</string>
-    <string name="register">Регистрация</string>
-    <string name="appTitle">Менеджер студентов</string>
-    <string name="loginTaken">Логин уже используется</string>
-    <string name="lOpInvalid">Некорректный логин или пароль</string>
-    <string name="regSuccess">Пользователь сохранен</string>
-    <string name="passwordReq">Минимум 6 символов</string>
+    <string name="sign_up_pass_confirm"><font size="14">Подтвердите пароль</font></string>
+    <string name="sign_up_button_confirm">Регистрация</string>
+    <string name="app_title">Менеджер студентов</string>
+    <string name="login_taken">Логин уже используется</string>
+    <string name="log_or_pass_invalid">Некорректный логин или пароль</string>
+    <string name="sign_up_success">Пользователь сохранен</string>
+    <string name="pass_required">Минимум 6 символов</string>
     <string name="enter">Войти</string>
 </resources>

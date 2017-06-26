@@ -43,25 +43,24 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(!password.equals(conPassword))
                     Toast.makeText(SignUpActivity.this, "Check passwords!", Toast.LENGTH_SHORT).show();
-                //boolean success = signUpAttempt(login, password);
                 if(password.equals(conPassword) && !password.equals("")) {
 
                     switch (signUpAttempt(login, password)) {
                         case -1:
                             Toast.makeText(SignUpActivity.this,
-                                    getResources().getString(R.string.loginTaken),
+                                    getResources().getString(R.string.login_taken),
                                     Toast.LENGTH_SHORT).show();
                             break;
                         case 0:
                             Toast.makeText(SignUpActivity.this,
-                                    getResources().getString(R.string.lOpInvalid),
+                                    getResources().getString(R.string.log_or_pass_invalid),
                                     Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             databaseHandler.addUser(new User(login, password.hashCode(), null, null, null, null, null, null));
                             onBackPressed();
                             Toast.makeText(SignUpActivity.this,
-                                    getResources().getString(R.string.regSuccess),
+                                    getResources().getString(R.string.sign_up_success),
                                     Toast.LENGTH_SHORT).show();
                             break;
                     }

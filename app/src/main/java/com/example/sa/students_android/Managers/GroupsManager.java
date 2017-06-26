@@ -55,7 +55,7 @@ public class GroupsManager implements ManagerInterface<Group> {
     @Override
     public Group add(Group group) {
         if(group != null)
-            group = groups.put(group.getGroupID(), group);
+            group = groups.put((Long) group.getGroupID(), group);
         return group;
     }
 

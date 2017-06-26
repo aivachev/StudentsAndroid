@@ -4,14 +4,14 @@ import java.util.*;
 
 public class Group<Long, User> extends HashMap{
 
-    private long groupID;
+    private Long groupID;
     private Integer size = 0;
 
     public void setSize(Integer size) {
         this.size = size;
     }
 
-    public Group (long groupID) {
+    public Group (Long groupID) {
         this.groupID = groupID;
     }
 
@@ -21,7 +21,7 @@ public class Group<Long, User> extends HashMap{
         return allUsers;
     }
 
-    public long getGroupID() {
+    public Long getGroupID() {
         return groupID;
     }
 

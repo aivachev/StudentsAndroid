@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/stud_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
+    <TextView
+        android:id="@+id/stud_first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="First name" />
+
+    <TextView
+        android:id="@+id/stud_middle_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Middle name" />
+
+    <TextView
+        android:id="@+id/stud_last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Last name" />
+
+    <TextView
+        android:id="@+id/stud_personal_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Personal ID" />
+
+    <TextView
+        android:id="@+id/stud_group_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Group" />
+</LinearLayout>
