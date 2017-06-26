@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
 import com.example.sa.students_android.SQLite.DatabaseHandler;
@@ -19,14 +20,14 @@ import com.example.sa.students_android.SQLite.DatabaseHandler;
 public class SignUpActivity extends AppCompatActivity {
 
     public static final String TAG = "REGACTIVITY";
-    DatabaseHandler databaseHandler;
+    UsersManager usersManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        databaseHandler = new DatabaseHandler(this);
+        usersManager = new UsersManager(this);
 
         final EditText newLogin = (EditText) findViewById(R.id.create_login);
         final EditText newPassword = (EditText) findViewById(R.id.create_password);
@@ -57,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            databaseHandler.addUser(new User(login, password.hashCode(), null, null, null, null, null, null));
+                            usersManager.addUser(new User(login, password.hashCode(), null, null, null, null, null, null));
                             onBackPressed();
                             Toast.makeText(SignUpActivity.this,
                                     getResources().getString(R.string.sign_up_success),
@@ -70,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     Integer signUpAttempt(String login, String password) {
-        if(databaseHandler.containsLogin("users", login)) {
+        if(usersManager.containsLogin("users", login)) {
             return -1;
         } else if(login.equals("") || password.length() < 6) {
             return 0;

@@ -1,64 +1,57 @@
 package com.example.sa.students_android.Models;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.io.Serializable;
+import java.util.List;
 
-public class Lesson {
+public class Lesson implements Serializable {
 
     private Long lessonID;
-    private String title;
-    private Date time;
+
+    private List<DayTime> daysNtimes;
     private Integer auditorium;
     private String description;
     private String subject;
-    private String lector;
-    private List<Group> groups;
+    private User lector;
+    private List<Long> groups;
 
-    public Lesson(Long lessonID, String title, Date time, Integer auditorium, String description, String subject, String lector, List<Group> groups) {
+    public Lesson(Long lessonID, List<DayTime> daysNtimes,
+                  Integer auditorium, String description, String subject,
+                  User lector, List<Long> groups) {
+
         this.lessonID = lessonID;
-        this.title = title;
-        this.time = time;
+
         this.auditorium = auditorium;
         this.description = description;
         this.subject = subject;
-        this.lector = lector;
+        if(lector.getRole().equals(Role.TEACHER))
+            this.lector = lector;
+        else
+            this.lector = null;
         this.groups = groups;
+        this.daysNtimes = daysNtimes;
     }
 
-    public Long getLessonID() {
+    public List<DayTime> getDaysNtimes() {
+        return daysNtimes;
+    }
+
+    public Long getId() {
         return lessonID;
     }
 
-    public List<Group> getGroups() {
+    public List<Long> getGroups() {
         return groups;
     }
 
     public String getGroupsAsString() {
         Integer counter = 0;
         StringBuilder stringBuilder = new StringBuilder();
-        for(Group group : groups)
-            if(++counter < groups.size())
-                stringBuilder.append(group.getGroupID()).append(", ");
-            else
-                stringBuilder.append(group.getGroupID());
+//        for(Group group : groups)
+//            if(++counter < groups.size())
+//                stringBuilder.append(group.getGroupID()).append(", ");
+//            else
+//                stringBuilder.append(group.getGroupID());
         return stringBuilder.toString();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
     }
 
     public Integer getAuditorium() {
@@ -77,26 +70,27 @@ public class Lesson {
         return subject;
     }
 
-    public String getLector() {
+    public User getLector() {
         return lector;
     }
 
-    public void setLector(String lector) {
-        this.lector = lector;
+    public void setLector(User lector) {
+        if(lector.getRole().equals(Role.TEACHER))
+            this.lector = lector;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (!(obj instanceof Lesson)) return false;
-        if (this.getLessonID() != ((Lesson) obj).getLessonID()) return false;
+        if (this.getId() != ((Lesson) obj).getId()) return false;
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
-        result = 31 * result + time.toString().hashCode();
+        int result = subject.hashCode();
+        result = 31 * result + daysNtimes.toString().hashCode();
         result = 31 * result + auditorium.hashCode();
         result = 31 * result + subject.hashCode();
         result = 31 * result + lector.hashCode();

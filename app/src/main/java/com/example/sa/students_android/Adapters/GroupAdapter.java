@@ -6,17 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sa.students_android.Activities.GroupsListActivity;
 import com.example.sa.students_android.Activities.StudentsListActivity;
-import com.example.sa.students_android.Models.Group;
-import com.example.sa.students_android.Models.User;
+import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.R;
 import com.example.sa.students_android.SQLite.DatabaseHandler;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -27,12 +25,14 @@ import java.util.Map;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder> {
 
-    private DatabaseHandler databaseHandler;
+    private UsersManager usersManager;
     private Context context;
+    private HashMap<Long, Integer> entries;
 
     public GroupAdapter(Context context) {
         this.context = context;
-        this.databaseHandler = new DatabaseHandler(context);
+        this.usersManager = new UsersManager(context);
+        this.entries = usersManager.getGroups();
     }
 
     @Override
@@ -40,13 +40,20 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.group_item, parent, false);
 
+        entries = usersManager.getGroups();
+
         return new GroupHolder(view);
+    }
+
+    public void updateList(HashMap<Long, Integer> entries) {
+        this.entries = entries;
+        notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(GroupHolder holder, int position) {
 
-//            Arrays.sort(databaseHandler.getGroups().entrySet().toArray(), new Comparator<Object>() {
+//            Arrays.sort(usersManager.getGroups().entrySet().toArray(), new Comparator<Object>() {
 //                @Override
 //                public int compare(Object o, Object t1) {
 //                    switch ( ( (Long) (((Map.Entry)o).getKey())).compareTo(((Long)(((Map.Entry)t1).getKey())))) {
@@ -60,13 +67,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 //                    return 0;
 //                }
 //            });
-//            Map.Entry[] entries = (Map.Entry[]) databaseHandler.getGroups().entrySet().toArray();
-        holder.bindData(databaseHandler.getGroups().entrySet().toArray()[position]);
+//            Map.Entry[] entries = (Map.Entry[]) usersManager.getGroups().entrySet().toArray();
+        holder.bindData(entries.entrySet().toArray()[position]);
     }
 
     @Override
     public int getItemCount() {
-        return databaseHandler.getGroups().size();
+        return entries.size();
     }
 
     public Context getContext() {

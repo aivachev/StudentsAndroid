@@ -6,16 +6,14 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sa.students_android.Adapters.ContactAdapter;
-import com.example.sa.students_android.Adapters.JournalListAdapter;
 import com.example.sa.students_android.Managers.LessonsManager;
 import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.Journal;
+import com.example.sa.students_android.Models.Role;
 import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
 
@@ -30,33 +28,33 @@ import java.util.List;
 
 public class StudentInfoActivity extends Activity {
 
-    private ListView listContacts;
-    private ListView listJournal;
-
-    private TextView studFirstName;
-    private TextView studLastName;
-    private TextView studMiddleName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
 
         UsersManager usersManager = new UsersManager(this);
-        LessonsManager lessonsManager = new LessonsManager();
+        LessonsManager lessonsManager = new LessonsManager(this);
 
         User thisUser = (User) getIntent().getSerializableExtra("currentStudent");
 
-        studFirstName = findViewById(R.id.spec_stud_first_name);
-        studLastName = findViewById(R.id.spec_stud_last_name);
-        studMiddleName = findViewById(R.id.spec_stud_middle_name);
+        TextView userFirstName = findViewById(R.id.spec_user_first_name);
+        TextView userLastName = findViewById(R.id.spec_user_last_name);
+        TextView userMiddleName = findViewById(R.id.spec_user_middle_name);
 
-        studFirstName.setText(thisUser.getFirstName());
-        studLastName.setText(thisUser.getLastName());
-        studMiddleName.setText(thisUser.getMiddleName());
+        userFirstName.setText(thisUser.getFirstName());
+        userLastName.setText(thisUser.getLastName());
+        userMiddleName.setText(thisUser.getMiddleName());
 
-        listContacts = findViewById(R.id.listContacts);
+        TextView userRole = findViewById(R.id.role_desc);
 
-        Log.i("StudInfoActivity", String.valueOf(thisUser.getContacts().isEmpty()));
+        if(thisUser.getRole().equals(Role.TEACHER)) {
+            userRole.setVisibility(View.VISIBLE);
+            userRole.setText("Преподаватель");
+        }
+
+        ListView listContacts = findViewById(R.id.listContacts);
+
         ContactAdapter contactAdapter = new ContactAdapter(this, thisUser.getContacts());
 //        ArrayAdapter<String> arrayAdapterContacts =
 //                new ArrayAdapter<>(StudentInfoActivity.this,
@@ -71,16 +69,16 @@ public class StudentInfoActivity extends Activity {
                     }
                 });
 
-        listJournal = (ListView) findViewById(R.id.journalList);
-        Journal journal =
-                new Journal(
-                        thisUser,
-                        lessonsManager.addDummyLesson(), true);
+        ListView listJournal = (ListView) findViewById(R.id.journalList);
+//        Journal journal =
+//                new Journal(
+//                        thisUser,
+//                        lessonsManager.addDummyLesson(), true);
         List<Journal> journals = new ArrayList<>();
-        journals.add(journal);
-        JournalListAdapter journalListAdapter =
-                new JournalListAdapter(this, journals);
-
-        listJournal.setAdapter(journalListAdapter);
+//        journals.add(journal);
+//        JournalListAdapter journalListAdapter =
+//                new JournalListAdapter(this, journals);
+//
+//        listJournal.setAdapter(journalListAdapter);
     }
 }

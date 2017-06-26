@@ -23,6 +23,9 @@
         <activity android:name=".Activities.GroupsListActivity"/>
         <activity android:name=".Activities.DebugActivity"/>
         <activity android:name=".Activities.StudentsListActivity"/>
+        <activity android:name=".Activities.AdminOverview"/>
+        <activity android:name=".Activities.StudentOverview"/>
+        <activity android:name=".Activities.LessonsListActivity"/>
     </application>
 
 </manifest>

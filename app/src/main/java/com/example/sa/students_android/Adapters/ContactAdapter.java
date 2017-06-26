@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.sa.students_android.Models.ContactType;
+import com.example.sa.students_android.Enums.ContactType;
 import com.example.sa.students_android.R;
 
 import java.util.ArrayList;

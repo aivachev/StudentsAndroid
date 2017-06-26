@@ -2,7 +2,11 @@ package com.example.sa.students_android.Models;
 
 import com.example.sa.students_android.Managers.UsersManager;
 
+import java.util.List;
+
 public class Journal {
+
+
 
     private User user;
 
@@ -29,7 +33,7 @@ public class Journal {
 
     public void start() {
         //UsersManager usersManager = new UsersManager();
-        //User user = usersManager.addDummyStudent(1993);
+        //User user = usersManager.addDummyUser(1993);
         //user.getFirstName();
     }
 

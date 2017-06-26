@@ -17,6 +17,32 @@ import java.util.Map;
  */
 public class SerializationStuff {
 
+    public static byte[] serialize(Object obj) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ObjectOutputStream os;
+        try {
+            os = new ObjectOutputStream(out);
+            os.writeObject(obj);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out.toByteArray();
+    }
+
+    public static Object deserialize(byte[] data) {
+        ByteArrayInputStream in = new ByteArrayInputStream(data);
+        ObjectInputStream is;
+        try {
+            is = new ObjectInputStream(in);
+            return is.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void serializeToFile(Object object, String fileName) {
 
         try (FileOutputStream out = new FileOutputStream(fileName + ".ser");
@@ -77,7 +103,7 @@ public class SerializationStuff {
                     rootElement = doc.createElement("Users");
                     break;
                 case "Group":
-                    rootElement = doc.createElement("Groups");
+                    rootElement = doc.createElement("Lessons");
                     break;
                 case "Lesson":
                     rootElement = doc.createElement("Lessons");
@@ -89,9 +115,9 @@ public class SerializationStuff {
 //            else if (element.getClass().isAssignableFrom(Lesson.class))
 //                rootElement = doc.createElement("Lessons");
 //            else if (element.getClass().isAssignableFrom(Group.class))
-//                rootElement = doc.createElement("Groups");
+//                rootElement = doc.createElement("Lessons");
 //            else if (element.getClass().isAssignableFrom(Journal.class))
-//                rootElement = doc.createElement("Journals");
+//                rootElement = doc.createElement("Lessons");
         }
 
         rootElement.appendChild(mainDocUnit);

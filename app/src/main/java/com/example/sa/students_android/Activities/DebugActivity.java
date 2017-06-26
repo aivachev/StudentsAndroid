@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.sa.students_android.Managers.LessonsManager;
 import com.example.sa.students_android.Managers.UsersManager;
+import com.example.sa.students_android.Models.Role;
 import com.example.sa.students_android.R;
 import com.example.sa.students_android.SQLite.DatabaseHandler;
 
@@ -16,10 +18,11 @@ import com.example.sa.students_android.SQLite.DatabaseHandler;
 
 public class DebugActivity extends Activity {
 
-    DatabaseHandler databaseHandler;
+    UsersManager usersManager;
 
     Button getGroups;
     Button dummyData;
+    Button dummyLessons;
 
 
     @Override
@@ -27,25 +30,36 @@ public class DebugActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_debug);
 
-        databaseHandler = new DatabaseHandler(this);
+        usersManager = new UsersManager(this);
 
         // Print existing groups to log
         getGroups = (Button) findViewById(R.id.get_groups);
         getGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseHandler.getGroups();
+                usersManager.getGroups();
             }
         });
 
-        // Create a number of dummy students to populate main table
-        dummyData = (Button) findViewById(R.id.dummy_data);
+        // Create a number of dummy students to populate users table
+        dummyData = (Button) findViewById(R.id.dummy_users);
         dummyData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UsersManager usersManager = new UsersManager(DebugActivity.this);
                 for(int i = 0; i < 100; i++)
-                    usersManager.addDummyStudent(1990);
+                    usersManager.addDummyUser(1990, Role.STUDENT);
+            }
+        });
+
+        // Create a number of dummy lessons to populate lessons table
+        dummyData = (Button) findViewById(R.id.dummy_lessons);
+        dummyData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LessonsManager lessonsManager = new LessonsManager(DebugActivity.this);
+                for(int i = 0; i < 100; i++)
+                    lessonsManager.addDummyLesson();
             }
         });
     }

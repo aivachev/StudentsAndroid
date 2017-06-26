@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     Button registrationButton;
 
-    static DatabaseHandler databaseHandler;
+    static UsersManager usersManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,16 @@ public class LoginActivity extends AppCompatActivity {
                 String login = loginText.getText().toString();
                 Integer password = passwordText.getText().toString().hashCode();
 
-                if (tryLogin(login, password))
-                    startActivity(new Intent(LoginActivity.this, GroupsListActivity.class));
+                Role result;
+                if ((result = tryLogin(login, password)) != null)
+                    switch (result) {
+                        case ADMIN:
+                            startActivity(new Intent(LoginActivity.this, AdminOverview.class));
+                            break;
+                        case STUDENT:
+                            startActivity(new Intent(LoginActivity.this, StudentOverview.class));
+                    }
+
             }
         });
 
@@ -57,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        databaseHandler = new DatabaseHandler(this);
+        usersManager = new UsersManager(this);
 
         Button debugMode = (Button) findViewById(R.id.debug_mode);
         debugMode.setOnClickListener(new View.OnClickListener() {
@@ -70,13 +78,15 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean tryLogin(String login, Integer password) {
+    private Role tryLogin(String login, Integer password) {
 
         // Are Login/Password valid?
         // If so, is there such a login in database?
         // If yes then check it's password.
-        return !(login.equals("") || password == 0)
-                && databaseHandler.containsLogin("users", login)
-                && databaseHandler.checkPassword(login, password.hashCode());
+        if(!(login.equals("") || password == 0)
+                && usersManager.containsLogin("users", login)
+                && usersManager.checkPassword(login, password.hashCode()))
+            return usersManager.getUserRole(login);
+        return null;
     }
 }

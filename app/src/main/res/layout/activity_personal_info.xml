@@ -51,9 +51,18 @@
             android:layout_marginTop="14dp"
             app:layout_constraintTop_toBottomOf="@+id/f_name_desc"
             app:layout_constraintLeft_toLeftOf="parent" />
-
         <TextView
-            android:id="@+id/spec_stud_last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/role_desc"
+            android:textColor="#000000"
+            android:text="Роль"
+            android:visibility="invisible"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/m_name_desc"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <TextView
+            android:id="@+id/spec_user_last_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -67,7 +76,7 @@
             android:layout_marginStart="8dp" />
 
         <TextView
-            android:id="@+id/spec_stud_first_name"
+            android:id="@+id/spec_user_first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -81,7 +90,7 @@
             android:layout_marginStart="8dp" />
 
         <TextView
-            android:id="@+id/spec_stud_middle_name"
+            android:id="@+id/spec_user_middle_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="0dp"
@@ -93,6 +102,7 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/m_name_desc"
             android:layout_marginLeft="8dp"
             app:layout_constraintHorizontal_bias="1.0" />
+
     </android.support.constraint.ConstraintLayout>
     <ImageView
         android:id="@+id/imageView"

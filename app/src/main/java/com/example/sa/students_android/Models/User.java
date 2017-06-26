@@ -2,12 +2,12 @@ package com.example.sa.students_android.Models;
 
 import android.util.Log;
 
+import com.example.sa.students_android.Enums.ContactType;
 import com.example.sa.students_android.Managers.GroupsManager;
 
 import java.io.*;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 public class User implements Serializable {

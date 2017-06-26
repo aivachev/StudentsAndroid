@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
 import com.example.sa.students_android.SQLite.DatabaseHandler;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ public class StudentAdapter extends BaseAdapter{
 
     private Long groupId;
     private Context context;
-    private DatabaseHandler databaseHandler;
+    private UsersManager usersManager;
     private LayoutInflater inflater;
     private List<User> allStudents;
 
@@ -29,8 +31,8 @@ public class StudentAdapter extends BaseAdapter{
 
         this.context = context;
         this.groupId = groupId;
-        this.databaseHandler = new DatabaseHandler(context);
-        this.allStudents = databaseHandler.getGroupMembers(groupId);
+        this.usersManager = new UsersManager(context);
+        this.allStudents = usersManager.getGroupMembers(groupId);
         this.inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -40,13 +42,18 @@ public class StudentAdapter extends BaseAdapter{
         return allStudents.size();
     }
 
+    public void updateList(List<User> allStudents) {
+        this.allStudents = allStudents;
+        notifyDataSetChanged();
+    }
+
     @Override
     public User getItem(int i) {
         return allStudents.get(i);
     }
 
     public List<User> getAllItems() {//check if consistent
-        return databaseHandler.getGroupMembers(groupId);
+        return usersManager.getGroupMembers(groupId);
     }
 
     @Override

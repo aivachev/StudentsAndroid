@@ -1,4 +1,4 @@
-package com.example.sa.students_android.Models;
+package com.example.sa.students_android.Enums;
 
 public enum ContactType {
     PHONE,
