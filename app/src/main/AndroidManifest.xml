@@ -20,12 +20,15 @@
 
         <activity android:name=".Activities.SignUpActivity"/>
 
-        <activity android:name=".Activities.GroupsListActivity"/>
+        <activity android:name=".Activities.GroupsListActivity"
+            android:launchMode="singleInstance"/>
         <activity android:name=".Activities.DebugActivity"/>
-        <activity android:name=".Activities.StudentsListActivity"/>
-        <activity android:name=".Activities.AdminOverview"/>
-        <activity android:name=".Activities.StudentOverview"/>
-        <activity android:name=".Activities.LessonsListActivity"/>
+        <activity android:name=".Activities.StudentsListActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".Activities.AdminOverviewActivity"/>
+        <activity android:name=".Activities.StudentOverviewActivity"/>
+        <activity android:name=".Activities.LessonsListActivity"
+            android:launchMode="singleInstance"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.sa.students_android.Adapters;
+package com.example.sa.students_android.Fragments.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -31,8 +31,6 @@ public class ContactAdapter extends BaseAdapter {
     public ContactAdapter(Context context, HashMap<String, ContactType> contacts) {
         this.context = context;
         this.contacts = contacts;
-//        Log.i("ItsMe", String.valueOf(contacts.isEmpty()));
-//        Log.i("ItsMe", String.valueOf(entries.size()));
         this.entries = new ArrayList<>(Arrays.asList(contacts.entrySet().toArray()));
         this.inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

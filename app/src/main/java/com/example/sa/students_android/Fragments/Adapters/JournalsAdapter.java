@@ -1,8 +1,6 @@
-package com.example.sa.students_android.Adapters;
+package com.example.sa.students_android.Fragments.Adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,13 @@ import java.util.List;
  * Created by sa on 22.06.17.
  */
 
-public class JournalListAdapter extends BaseAdapter {
+public class JournalsAdapter extends BaseAdapter {
 
     private Context context;
     private List<Journal> journals;
     private LayoutInflater inflater;
 
-    public JournalListAdapter(
+    public JournalsAdapter(
             Context context, List<Journal> journals) {
         this.context = context;
         this.journals = journals;

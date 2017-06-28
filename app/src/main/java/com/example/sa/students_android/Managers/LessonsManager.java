@@ -70,8 +70,6 @@ public class LessonsManager implements ManagerInterface<Lesson> {
 
         List<Lesson> result = new ArrayList<>();
 
-
-
         return result;
     }
 
@@ -103,10 +101,7 @@ public class LessonsManager implements ManagerInterface<Lesson> {
     public List<Lesson> getLessons() {
         List<Lesson> list = new ArrayList<>();
         list.addAll(lessons.values());
-//        for (Object o : lessons.entrySet()) {
-//            Map.Entry pair = (Map.Entry) o;
-//            System.out.println(((Lesson) pair.getValue()).getTitle() + " at " + ((Lesson) pair.getValue()).getTime() + " in " + ((Lesson) pair.getValue()).getAuditorium() + ". Lessons attending: " + ((Lesson) pair.getValue()).getGroupsAsString() + " (lessonID = " + ((Lesson) pair.getValue()).getId() + ")");
-//        }
+
         return list;
     }
 

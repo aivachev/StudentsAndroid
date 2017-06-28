@@ -1,4 +1,4 @@
-package com.example.sa.students_android.Adapters;
+package com.example.sa.students_android.Fragments.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.example.sa.students_android.Activities.StudentsListActivity;
 import com.example.sa.students_android.Managers.UsersManager;
+import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
-import com.example.sa.students_android.SQLite.DatabaseHandler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,13 +23,13 @@ import java.util.Map;
  * Created by sa on 22.06.17.
  */
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder> {
+public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupHolder> {
 
     private UsersManager usersManager;
     private Context context;
     private HashMap<Long, Integer> entries;
 
-    public GroupAdapter(Context context) {
+    public GroupsAdapter(Context context) {
         this.context = context;
         this.usersManager = new UsersManager(context);
         this.entries = usersManager.getGroups();
@@ -52,22 +52,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     @Override
     public void onBindViewHolder(GroupHolder holder, int position) {
-
-//            Arrays.sort(usersManager.getGroups().entrySet().toArray(), new Comparator<Object>() {
-//                @Override
-//                public int compare(Object o, Object t1) {
-//                    switch ( ( (Long) (((Map.Entry)o).getKey())).compareTo(((Long)(((Map.Entry)t1).getKey())))) {
-//                        case -1:
-//                            return -1;
-//                        case 0:
-//                            return 0;
-//                        case 1:
-//                            return 1;
-//                    }
-//                    return 0;
-//                }
-//            });
-//            Map.Entry[] entries = (Map.Entry[]) usersManager.getGroups().entrySet().toArray();
         holder.bindData(entries.entrySet().toArray()[position]);
     }
 
@@ -76,17 +60,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         return entries.size();
     }
 
-    public Context getContext() {
-        return context;
-    }
+    // UsersHolder
 
-    public void delete(int position) {
-        notifyItemRemoved(position);
-    }
-
-    // GroupHolder
-
-    class GroupHolder extends RecyclerView.ViewHolder {
+    class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener  {
 
         private TextView groupName;
         private TextView groupCount;
@@ -96,14 +72,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
             groupName = (TextView) itemView.findViewById(R.id.groupListItemName);
             groupCount = (TextView) itemView.findViewById(R.id.groupListItemCount);
-            super.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, StudentsListActivity.class).putExtra("groupId", groupName.getText().toString().substring(1));
-                    context.startActivity(intent);
-                    Toast.makeText(getContext(), groupName.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            super.itemView.setOnClickListener(this);
+            super.itemView.setOnLongClickListener(this);
         }
 
         void bindData(Object object) {
@@ -112,6 +82,19 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
             groupName.setText(String.format(Locale.getDefault(), "#%d", (Long) mapEntry.getKey()));
             groupCount.setText(String.format(Locale.getDefault(), "Людей: %d" , (Integer) mapEntry.getValue()));
 
+        }
+
+        @Override
+        public void onClick(View view) {
+            Context viewContext = view.getContext();
+            Intent intent = new Intent(viewContext, StudentsListActivity.class).putExtra("groupId", groupName.getText().toString().substring(1));
+            viewContext.startActivity(intent);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            Toast.makeText(context, "Long kek", Toast.LENGTH_SHORT).show();
+            return true;
         }
     }
 }

@@ -10,7 +10,7 @@ import com.example.sa.students_android.R;
  * Created by sa on 26.06.17.
  */
 
-public class StudentOverview extends AppCompatActivity {
+public class StudentOverviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

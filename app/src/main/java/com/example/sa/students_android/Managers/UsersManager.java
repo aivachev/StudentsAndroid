@@ -161,22 +161,10 @@ public class UsersManager {
 
         SQLiteDatabase db = databaseHandler.getReadableDatabase();
 
-        String[] projection = {
-                KEY_PERSONAL_ID,
-                KEY_LOGIN,
-                KEY_FIRSTNAME,
-                KEY_LASTNAME,
-                KEY_MIDDLENAME,
-                KEY_DATEOFBIRTH,
-                KEY_GROUP_ID,
-                KEY_CONTACTS,
-                KEY_ROLE,
-        };
         String selection = KEY_GROUP_ID + " = ?";
 
         String[] selectionArgs;
         if(groupId == -1L) {
-            projection = null;
             selectionArgs = null;
             selection = null;
         } else
@@ -186,7 +174,7 @@ public class UsersManager {
 
         Cursor cursor = db.query(
                 TABLE_USERS,                     // The table to query
-                projection,                      // The columns to return
+                null,                            // The columns to return (null means get all)
                 selection,                       // The columns for the WHERE clause
                 selectionArgs,                   // The values for the WHERE clause
                 null,                            // don't group the rows

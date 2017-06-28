@@ -13,7 +13,7 @@ import com.example.sa.students_android.R;
  * Created by sa on 26.06.17.
  */
 
-public class AdminOverview extends AppCompatActivity {
+public class AdminOverviewActivity extends AppCompatActivity {
 
     Button Students;
     Button Groups;
@@ -31,21 +31,21 @@ public class AdminOverview extends AppCompatActivity {
         Students.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminOverview.this, StudentsListActivity.class).putExtra("groupId", -1L));
+                startActivity(new Intent(AdminOverviewActivity.this, StudentsListActivity.class).putExtra("groupId", -1L));
             }
         });
 
         Groups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminOverview.this, GroupsListActivity.class));
+                startActivity(new Intent(AdminOverviewActivity.this, GroupsListActivity.class));
             }
         });
 
         Lessons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminOverview.this, LessonsListActivity.class));
+                startActivity(new Intent(AdminOverviewActivity.this, LessonsListActivity.class));
             }
         });
     }

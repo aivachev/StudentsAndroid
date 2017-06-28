@@ -9,11 +9,7 @@ import android.widget.EditText;
 
 import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.Role;
-import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
-import com.example.sa.students_android.SQLite.DatabaseHandler;
-
-import java.util.Date;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -48,10 +44,10 @@ public class LoginActivity extends AppCompatActivity {
                 if ((result = tryLogin(login, password)) != null)
                     switch (result) {
                         case ADMIN:
-                            startActivity(new Intent(LoginActivity.this, AdminOverview.class));
+                            startActivity(new Intent(LoginActivity.this, AdminOverviewActivity.class));
                             break;
                         case STUDENT:
-                            startActivity(new Intent(LoginActivity.this, StudentOverview.class));
+                            startActivity(new Intent(LoginActivity.this, StudentOverviewActivity.class));
                     }
 
             }

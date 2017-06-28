@@ -3,21 +3,18 @@ package com.example.sa.students_android.Activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.sa.students_android.Adapters.ContactAdapter;
+import com.example.sa.students_android.Fragments.Adapters.ContactAdapter;
 import com.example.sa.students_android.Managers.LessonsManager;
 import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.Journal;
 import com.example.sa.students_android.Models.Role;
 import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +53,7 @@ public class StudentInfoActivity extends Activity {
         ListView listContacts = findViewById(R.id.listContacts);
 
         ContactAdapter contactAdapter = new ContactAdapter(this, thisUser.getContacts());
-//        ArrayAdapter<String> arrayAdapterContacts =
-//                new ArrayAdapter<>(StudentInfoActivity.this,
-//                        android.R.layout.simple_list_item_1,
-//                        new String[]{"+7 (981) 777-77-77", "@thisIsATest", "vk.com/id01"});
+
         listContacts.setAdapter(contactAdapter);
 
         listContacts.setOnItemClickListener(
@@ -70,15 +64,7 @@ public class StudentInfoActivity extends Activity {
                 });
 
         ListView listJournal = (ListView) findViewById(R.id.journalList);
-//        Journal journal =
-//                new Journal(
-//                        thisUser,
-//                        lessonsManager.addDummyLesson(), true);
+
         List<Journal> journals = new ArrayList<>();
-//        journals.add(journal);
-//        JournalListAdapter journalListAdapter =
-//                new JournalListAdapter(this, journals);
-//
-//        listJournal.setAdapter(journalListAdapter);
     }
 }

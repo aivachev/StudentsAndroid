@@ -1,17 +1,19 @@
 package com.example.sa.students_android.Activities;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import com.example.sa.students_android.Adapters.GroupAdapter;
+import com.example.sa.students_android.Fragments.Adapters.GroupsAdapter;
+import com.example.sa.students_android.Fragments.Adapters.UsersAdapter;
 import com.example.sa.students_android.Managers.UsersManager;
-import com.example.sa.students_android.Models.Group;
 import com.example.sa.students_android.R;
 
 import java.util.HashMap;
@@ -23,7 +25,7 @@ import java.util.Map;
 
 public class GroupsListActivity extends Activity {
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewFragment;
     EditText searchField;
     UsersManager usersManager;
 
@@ -35,10 +37,11 @@ public class GroupsListActivity extends Activity {
 
         usersManager = new UsersManager(this);
 
-        recyclerView = findViewById(R.id.groupsList);
-        recyclerView.setAdapter(new GroupAdapter(this));
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.users_rec_list_fragment);
+        recyclerViewFragment = (RecyclerView) fragment.getView().findViewById(R.id.rec_list_in_fragment);
+        recyclerViewFragment.setAdapter(new GroupsAdapter(GroupsListActivity.this));
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerViewFragment.setLayoutManager(new GridLayoutManager(this, 3));
 
         searchField = findViewById(R.id.sort_by);
         searchField.addTextChangedListener(new TextWatcher() {
@@ -68,7 +71,7 @@ public class GroupsListActivity extends Activity {
                     }
                 }
                 //update recyclerview
-                ((GroupAdapter)recyclerView.getAdapter()).updateList(temp);
+                ((GroupsAdapter) recyclerViewFragment.getAdapter()).updateList(temp);
             }
         });
     }
