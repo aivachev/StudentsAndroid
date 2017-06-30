@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
+import android.view.View;
 import android.widget.EditText;
 
 import com.example.sa.students_android.Fragments.Adapters.GroupsAdapter;
@@ -30,6 +32,11 @@ public class GroupsListActivity extends Activity {
     UsersManager usersManager;
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -37,7 +44,9 @@ public class GroupsListActivity extends Activity {
 
         usersManager = new UsersManager(this);
 
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.users_rec_list_fragment);
+
+
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.groups_rec_list_fragment);
         recyclerViewFragment = (RecyclerView) fragment.getView().findViewById(R.id.rec_list_in_fragment);
         recyclerViewFragment.setAdapter(new GroupsAdapter(GroupsListActivity.this));
 

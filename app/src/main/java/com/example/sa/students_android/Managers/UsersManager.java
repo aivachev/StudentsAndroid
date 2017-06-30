@@ -198,9 +198,9 @@ public class UsersManager {
                 String lastName = cursor.getString(cursor.getColumnIndex(KEY_LASTNAME));
                 Date dateOfBirth = (java.util.Date) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_DATEOFBIRTH)));
                 Long groupIdFromTable = cursor.getLong(cursor.getColumnIndex(KEY_GROUP_ID));
-                Contacts contacts = (Contacts) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_CONTACTS)));
+                List<Contacts> contacts = (List<Contacts>) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_CONTACTS)));
                 Role role = (Role) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_ROLE)));
-
+                Log.i("ABOUT_USER", String.valueOf(contacts.size()));
                 result.add(
                         new User(
                                 personalId,
@@ -216,6 +216,65 @@ public class UsersManager {
                         )
                 );
 
+            }
+        cursor.close();
+        return result;
+    }
+
+    // Returns a list of users that are members of queried group
+    public User getUserById(Long personalId) {
+
+        User result = null;
+
+        SQLiteDatabase db = databaseHandler.getReadableDatabase();
+
+        String selection = KEY_PERSONAL_ID + " = ?";
+
+        String[] selectionArgs = new String[] {
+                personalId.toString()
+        };
+
+        Cursor cursor = db.query(
+                TABLE_USERS,                     // The table to query
+                null,                            // The columns to return (null means get all)
+                selection,                       // The columns for the WHERE clause
+                selectionArgs,                   // The values for the WHERE clause
+                null,                            // don't group the rows
+                null,                            // don't filter by row groups
+                null                             // The sort order
+        );
+
+        if(cursor.getCount() == 0) {
+            cursor.close();
+            return null;
+        }
+
+        if(cursor.getCount() >= 1)
+            while (cursor.moveToNext()) {
+
+//                Long userId = cursor.getLong(cursor.getColumnIndex(KEY_PERSONAL_ID));
+                String login = cursor.getString(cursor.getColumnIndex(KEY_LOGIN));
+                Integer password = 0;
+                String firstName = cursor.getString(cursor.getColumnIndex(KEY_FIRSTNAME));
+                String middleName = cursor.getString(cursor.getColumnIndex(KEY_MIDDLENAME));
+                String lastName = cursor.getString(cursor.getColumnIndex(KEY_LASTNAME));
+                Date dateOfBirth = (java.util.Date) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_DATEOFBIRTH)));
+                Long groupIdFromTable = cursor.getLong(cursor.getColumnIndex(KEY_GROUP_ID));
+                List<Contacts> contacts = (List<Contacts>) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_CONTACTS)));
+                Role role = (Role) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_ROLE)));
+
+                result = new User(
+                                personalId,
+                                login,
+                                password,
+                                firstName,
+                                middleName,
+                                lastName,
+                                dateOfBirth,
+                                groupIdFromTable,
+                                contacts,
+                                role
+                        );
             }
         cursor.close();
         return result;

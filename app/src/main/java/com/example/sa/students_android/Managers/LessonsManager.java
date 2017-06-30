@@ -2,6 +2,7 @@ package com.example.sa.students_android.Managers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sa.students_android.Models.DayTime;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static com.example.sa.students_android.MyUtilMethods.SerializationStuff.deserialize;
 import static com.example.sa.students_android.MyUtilMethods.SerializationStuff.serialize;
 import static com.example.sa.students_android.SQLite.DBContracts.Lessons.KEY_AUDITORIUM;
 import static com.example.sa.students_android.SQLite.DBContracts.Lessons.KEY_DAYSNTIMES;
@@ -29,6 +31,9 @@ import static com.example.sa.students_android.SQLite.DBContracts.Lessons.KEY_LEC
 import static com.example.sa.students_android.SQLite.DBContracts.Lessons.KEY_LESSON_ID;
 import static com.example.sa.students_android.SQLite.DBContracts.Lessons.KEY_SUBJECT;
 import static com.example.sa.students_android.SQLite.DBContracts.Lessons.TABLE_LESSONS;
+import static com.example.sa.students_android.SQLite.DBContracts.Users.KEY_LOGIN;
+import static com.example.sa.students_android.SQLite.DBContracts.Users.KEY_ROLE;
+import static com.example.sa.students_android.SQLite.DBContracts.Users.TABLE_USERS;
 
 public class LessonsManager implements ManagerInterface<Lesson> {
 
@@ -69,6 +74,93 @@ public class LessonsManager implements ManagerInterface<Lesson> {
     public List<Lesson> getAllLessons() {
 
         List<Lesson> result = new ArrayList<>();
+
+        SQLiteDatabase db = databaseHandler.getReadableDatabase();
+
+        String[] projection = null;
+        String selection = null;
+        String[] selectionArgs = null;
+
+        Cursor cursor = db.query(
+                TABLE_LESSONS,                     // The table to query
+                projection,                      // The columns to return
+                selection,                       // The columns for the WHERE clause
+                selectionArgs,                   // The values for the WHERE clause
+                null,                            // don't group the rows
+                null,                            // don't filter by row groups
+                null                             // The sort order
+        );
+
+        if(cursor.getCount() == 0) {
+            cursor.close();
+            return result;
+        }
+
+        if(cursor.getCount() > 0)
+            while (cursor.moveToNext()) {
+
+                long lessonId = cursor.getLong(cursor.getColumnIndex(KEY_LESSON_ID));
+                List<DayTime> daysNtimes = (List<DayTime>) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_DAYSNTIMES)));
+                int auditorium = cursor.getInt(cursor.getColumnIndex(KEY_AUDITORIUM));
+                String description = cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION));
+                String subject = cursor.getString(cursor.getColumnIndex(KEY_SUBJECT));
+                User lector = (User) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_LECTOR)));
+                List<Long> groups = (List<Long>) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_GROUPS)));
+
+                result.add(
+                        new Lesson(
+                                lessonId,
+                                daysNtimes,
+                                auditorium,
+                                description,
+                                subject,
+                                lector,
+                                groups
+                        ));
+
+            }
+        cursor.close();
+
+        return result;
+    }
+
+    public List<Lesson> getLessonsForGroup(Long groupId) {
+
+        List<Lesson> result = new ArrayList<>();
+//
+//        SQLiteDatabase db = databaseHandler.getReadableDatabase();
+//
+//        String[] projection = null;
+//        String selection = KEY_GR + " = ?";
+//        String[] selectionArgs = {
+//                login
+//        };
+//
+//        Cursor cursor = db.query(
+//                TABLE_USERS,                     // The table to query
+//                projection,                      // The columns to return
+//                selection,                       // The columns for the WHERE clause
+//                selectionArgs,                   // The values for the WHERE clause
+//                null,                            // don't group the rows
+//                null,                            // don't filter by row groups
+//                null                             // The sort order
+//        );
+//
+//        if(cursor.getCount() == 0) {
+//            cursor.close();
+//            return null;
+//        }
+//
+//        Role role = Role.STUDENT;
+//
+//        if(cursor.getCount() == 1)
+//            while (cursor.moveToNext()) {
+//
+//                role = (Role) deserialize(cursor.getBlob(cursor.getColumnIndex(KEY_ROLE)));
+//
+//            }
+//        cursor.close();
+//
 
         return result;
     }

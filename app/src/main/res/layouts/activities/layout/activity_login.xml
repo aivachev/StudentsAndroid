@@ -44,7 +44,8 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:fontFamily="sans-serif"/>
     </LinearLayout>
 
     <LinearLayout

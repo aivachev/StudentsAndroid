@@ -1,10 +1,12 @@
 package com.example.sa.students_android.Fragments.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,13 +14,11 @@ import android.widget.Toast;
 
 import com.example.sa.students_android.Activities.StudentInfoActivity;
 import com.example.sa.students_android.Activities.StudentsListActivity;
-import com.example.sa.students_android.Enums.ContactType;
 import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by sa on 24.06.17.
@@ -67,7 +67,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         notifyDataSetChanged();
     }
 
-    class UsersHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    class UsersHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener /*View.OnLongClickListener*/ {
 
         private TextView login;
         private TextView firstName;
@@ -86,8 +86,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
             personalId = (TextView) itemView.findViewById(R.id.stud_personal_id);
             groupIdtv = (TextView) itemView.findViewById(R.id.stud_group_id);
 
+            itemView.setOnCreateContextMenuListener(this);
             itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
+            //itemView.setOnLongClickListener(this);
         }
 
         void bindData(User user) {
@@ -104,19 +105,19 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         @Override
         public void onClick(View view) {
             Context viewContext = view.getContext();
-            Intent intent = new Intent(viewContext, StudentInfoActivity.class).putExtra("currentStudent", usersManager.getGroupMembers(groupId).get(getAdapterPosition()));
+            Intent intent = new Intent(viewContext, StudentInfoActivity.class).putExtra("currentStudent", entries.get(getAdapterPosition()));
             viewContext.startActivity(intent);
             Toast.makeText(context, "Short kek", Toast.LENGTH_SHORT).show();
         }
 
-        @Override
+/*        @Override
         public boolean onLongClick(View view) {
             User user = usersManager.getGroupMembers(groupId).get(getAdapterPosition());
             String phoneNumber = "";
             String telephone;
-            for(Map.Entry mapEntry : user.getContacts().entrySet())
-                if(mapEntry.getValue().equals(ContactType.PHONE)) {
-                    phoneNumber = mapEntry.getKey().toString();
+            for(Contacts contacts : user.getContacts())
+                if(contacts.getType().equals(ContactType.PHONE)) {
+                    phoneNumber = contacts.getValue();
                 }
             if(!phoneNumber.equals("")) {
                 telephone = "tel:" + phoneNumber;
@@ -127,6 +128,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
             } else
                 Toast.makeText(context, "Long kek", Toast.LENGTH_SHORT).show();
             return true;
+        }*/
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            MenuInflater menuInflater = ((Activity)context).getMenuInflater();
+            menuInflater.inflate(R.menu.menu_user_context, contextMenu);
+            ((StudentsListActivity)context).setUserForContextMenu(entries.get(getAdapterPosition()));
         }
     }
 }

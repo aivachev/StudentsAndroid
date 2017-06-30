@@ -65,7 +65,8 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:singleLine="true"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:fontFamily="sans-serif"/>
 
         <TextView
             android:textSize="12sp"
@@ -88,7 +89,8 @@
             android:hint="@string/sign_up_pass_confirm"
             android:inputType="textPassword"
             android:singleLine="true"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:fontFamily="sans-serif"/>
     </LinearLayout>
 
     <Button

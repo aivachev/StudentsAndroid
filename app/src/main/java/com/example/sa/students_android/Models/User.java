@@ -6,8 +6,10 @@ import com.example.sa.students_android.Enums.ContactType;
 import com.example.sa.students_android.Managers.GroupsManager;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class User implements Serializable {
@@ -19,7 +21,7 @@ public class User implements Serializable {
     private String lastName;
     private Date dateOfBirth;
     transient private Group group;
-    private Contacts<String, ContactType> contacts = new Contacts();
+    private List<Contacts> contacts = new ArrayList<>();
     final Long id;
     private Role role;
 
@@ -40,7 +42,7 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.id = System.currentTimeMillis() + random.nextInt(100_000_000);
-        this.contacts.put("+7(123)456-78-90", ContactType.PHONE);
+        this.contacts.add(new Contacts("+7(123)456-78-90", ContactType.PHONE));
         this.role = role;
 
         if(!GroupsManager.groups.containsKey(groupId))
@@ -50,7 +52,7 @@ public class User implements Serializable {
         GroupsManager.addUserToGroup(this, groupId);
     }
 
-    public User(Long id, String login, Integer password, String firstName, String middleName, String lastName, Date dateOfBirth, Long groupId, Contacts contacts, Role role) {
+    public User(Long id, String login, Integer password, String firstName, String middleName, String lastName, Date dateOfBirth, Long groupId, List<Contacts> contacts, Role role) {
 
         this.login = login;
         this.password = password;
@@ -63,7 +65,7 @@ public class User implements Serializable {
         this.contacts = contacts;
         this.role = role;
 
-        Log.i("ItsMeUser", String.valueOf(contacts.isEmpty()));
+//        Log.i("ItsMeUser", String.valueOf(contacts.isEmpty()));
 
         if(!GroupsManager.groups.containsKey(groupId))
             GroupsManager.createGroup(groupId);
@@ -168,7 +170,7 @@ public class User implements Serializable {
         return group;
     }
 
-    public HashMap<String, ContactType> getContacts() {
+    public List<Contacts> getContacts() {
         return contacts;
     }
 

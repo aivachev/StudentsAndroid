@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sa.students_android.Activities.GroupsListActivity;
 import com.example.sa.students_android.Activities.StudentsListActivity;
 import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.User;
@@ -94,6 +95,8 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupHolde
         @Override
         public boolean onLongClick(View view) {
             Toast.makeText(context, "Long kek", Toast.LENGTH_SHORT).show();
+
+            //TODO Try to call onCreateContextOptionMenu from inside GroupsListActivity
             return true;
         }
     }

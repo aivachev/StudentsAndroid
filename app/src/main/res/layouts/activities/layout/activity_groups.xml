@@ -8,7 +8,7 @@
     android:scrollbars="vertical">
 
     <TextView
-        android:id="@+id/textGroups"
+        android:id="@+id/textLessons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Группы:"
@@ -26,12 +26,12 @@
         android:id="@+id/sort_by"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/textGroups"
+        app:layout_constraintLeft_toRightOf="@+id/textLessons"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textGroups" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textLessons" />
 
     <!--<android.support.v7.widget.RecyclerView-->
         <!--android:id="@+id/groupsList"-->
@@ -55,7 +55,7 @@
         <!--android:layout_marginEnd="8dp" />-->
 
     <fragment
-        android:id="@+id/users_rec_list_fragment"
+        android:id="@+id/groups_rec_list_fragment"
         android:name="com.example.sa.students_android.Fragments.RecyclerViewFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"

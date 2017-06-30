@@ -199,24 +199,50 @@
         tools:layout_editor_absoluteY="256dp"
         tools:layout_editor_absoluteX="0dp" />
 
-    <ListView
-        android:id="@+id/listContacts"
+    <fragment
+        android:id="@+id/contacts_rec_list_fragment"
+        android:name="com.example.sa.students_android.Fragments.RecyclerViewFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        tools:layout="@layout/fragment_lists"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <ListView
-        android:id="@+id/journalList"
+    <!--<ListView-->
+        <!--android:id="@+id/listContacts"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/guideline5"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+
+    <fragment
+        android:id="@+id/lessons_rec_list_fragment"
+        android:name="com.example.sa.students_android.Fragments.RecyclerViewFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        tools:layout="@layout/fragment_lists"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideline5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.0" />
+
 </android.support.constraint.ConstraintLayout>

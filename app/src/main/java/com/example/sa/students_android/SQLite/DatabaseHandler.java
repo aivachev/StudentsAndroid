@@ -47,8 +47,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DBContracts.Users.SQL_CREATE_ENTRIES);
 
-        Contacts con = new Contacts<String, ContactType>();
-        con.put("777-77-77", ContactType.PHONE);
+        List<Contacts> con = new ArrayList<>();
+        con.add(new Contacts("777-77-77", ContactType.PHONE));
+        con.add(new Contacts("@IvanUsov", ContactType.TELEGRAM));
+        con.add(new Contacts("TestAdminSkype", ContactType.SKYPE));
+        con.add(new Contacts("testVK", ContactType.VK));
 
         // Adding 'admin' user
         ContentValues values = new ContentValues();

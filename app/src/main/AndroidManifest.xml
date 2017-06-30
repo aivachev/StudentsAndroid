@@ -29,6 +29,7 @@
         <activity android:name=".Activities.StudentOverviewActivity"/>
         <activity android:name=".Activities.LessonsListActivity"
             android:launchMode="singleInstance"/>
+        <activity android:name=".Activities.AddLessonActivity"/>
     </application>
 
 </manifest>
