@@ -31,6 +31,16 @@ public class DayTime {
         THIRD,
         FOURTH,
         FIFTH,
-        SIXTH
+        SIXTH;
+
+        public static String[] getValues() {
+            String[] strs = new String[Times.values().length];
+            int i = 0;
+
+            for (Times t : Times.values())
+                strs[i++] = t.toString().toLowerCase();
+
+            return strs;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.sa.students_android.Fragments;
+package com.example.sa.students_android.Interfaces;
 
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,5 +9,5 @@ import android.view.View;
 
 public interface ContextMenuListener<T> {
 
-    public void callback(View view, String result, @Nullable T object);
+    public void callback(View view, String result, T object);
 }

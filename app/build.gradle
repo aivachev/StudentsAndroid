@@ -16,6 +16,16 @@ android {
         main {
             res.srcDirs =
                     [
+
+                            'src/main/res/layouts/activities',
+                            'src/main/res/layouts/list_items',
+                            'src/main/res/layouts/',
+                            'src/main/res'
+                    ]
+        }
+        debug {
+            res.srcDirs =
+                    [
                             'src/main/res/layouts/activities',
                             'src/main/res/layouts/list_items',
                             'src/main/res/layouts/',

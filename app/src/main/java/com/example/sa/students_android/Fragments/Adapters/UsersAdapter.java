@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sa.students_android.Activities.StudentInfoActivity;
-import com.example.sa.students_android.Activities.StudentsListActivity;
+import com.example.sa.students_android.Interfaces.ContextMenuListener;
 import com.example.sa.students_android.Managers.UsersManager;
 import com.example.sa.students_android.Models.User;
 import com.example.sa.students_android.R;
@@ -29,7 +29,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     private Long groupId;
     private Context context;
     private UsersManager usersManager;
-    private List<User> entries;
+    public List<User> entries;
 
     public UsersAdapter(Context context, Long groupId) {
 
@@ -40,7 +40,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     }
 
     @Override
-    public UsersHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public UsersAdapter.UsersHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.users_item, parent, false);
 
@@ -67,7 +67,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         notifyDataSetChanged();
     }
 
-    class UsersHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener /*View.OnLongClickListener*/ {
+    public class UsersHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener /*View.OnLongClickListener*/ {
 
         private TextView login;
         private TextView firstName;
@@ -76,7 +76,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         private TextView personalId;
         private TextView groupIdtv;
 
-        UsersHolder(View itemView) {
+        public UsersHolder(View itemView) {
             super(itemView);
 
             login = (TextView) itemView.findViewById(R.id.stud_login);
@@ -134,7 +134,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
             MenuInflater menuInflater = ((Activity)context).getMenuInflater();
             menuInflater.inflate(R.menu.menu_user_context, contextMenu);
-            ((StudentsListActivity)context).setUserForContextMenu(entries.get(getAdapterPosition()));
+            ((ContextMenuListener<User>)context).callback(null, null, entries.get(getAdapterPosition()));
         }
     }
 }

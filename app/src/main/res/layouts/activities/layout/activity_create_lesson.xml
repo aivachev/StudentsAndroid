@@ -122,24 +122,24 @@
         android:text="Время:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/day_spinner"
         android:layout_marginStart="22dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/time_spinner"
-        android:layout_marginLeft="22dp" />
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/choose_day" />
 
     <TextView
         android:id="@+id/time_selected"
         android:text="ПАРА"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/day_spinner"
         android:layout_marginStart="22dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toRightOf="@id/time"
-        android:layout_marginLeft="22dp" />
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/choose_day" />
 
     <Spinner
         android:id="@+id/time_spinner"
@@ -154,5 +154,27 @@
         android:layout_marginEnd="8dp"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1" />
+
+    <Button
+        android:onClick="showChooseDayDialog"
+        android:id="@+id/choose_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHOOSE"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/day"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/day" />
+
+    <Button
+        android:onClick="showChooseTimeDialog"
+        android:id="@+id/choose_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHOOSE"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/time" />
 
 </android.support.constraint.ConstraintLayout>

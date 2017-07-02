@@ -1,7 +1,6 @@
 package com.example.sa.students_android.Activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.sa.students_android.Enums.ContactType;
 import com.example.sa.students_android.Fragments.Adapters.UsersAdapter;
-import com.example.sa.students_android.Fragments.ContextMenuListener;
+import com.example.sa.students_android.Interfaces.ContextMenuListener;
 import com.example.sa.students_android.Fragments.RecyclerViewFragment;
 import com.example.sa.students_android.Models.Contacts;
 import com.example.sa.students_android.Models.User;
@@ -111,7 +110,7 @@ public class StudentsListActivity extends Activity implements ContextMenuListene
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
-//        Toast.makeText(this, selectedUser.getFirstName().toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, teacher.getFirstName().toString(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.call_user:
                 Toast.makeText(this, "Calling " + selectedUser.getFirstName(), Toast.LENGTH_SHORT).show();
